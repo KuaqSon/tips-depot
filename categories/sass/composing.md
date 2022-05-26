@@ -1,6 +1,6 @@
 ---
 title: Composing
-category: Scss
+category: Sass
 ---
 
 ### Composing
