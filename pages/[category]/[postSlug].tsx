@@ -21,7 +21,7 @@ interface PostPageProps {
   post: IPost;
 }
 
-export default function PostPage({ categories, content, frontMatter, prevPost, nextPost, post }) {
+export default function PostPage({ categories, content, frontMatter, prevPost, nextPost, post }: PostPageProps) {
   return (
     <>
       <Box>
