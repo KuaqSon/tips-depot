@@ -32,4 +32,3 @@ category: Python
     list.sort()        # sorts in-place, returns None
     sorted(list)       # returns sorted copy of list
     ",".join(list)     # returns a string with list elements seperated by comma
-

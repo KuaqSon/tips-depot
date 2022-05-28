@@ -13,4 +13,3 @@ SHOW CREATE TABLE table;
 SHOW PROCESSLIST;
 KILL process_number;
 ```
-
