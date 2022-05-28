@@ -22,7 +22,7 @@ const Code = (props: any) => {
   ) : (
     <Highlight {...defaultProps} theme={dracula} code={code} language={lang as Language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <Box as="pre" className={className} style={style} padding={4} my={2} borderRadius="10px">
+        <Box as="pre" className={className} style={style} padding={4} my={2} borderRadius="10px" overflowX="auto">
           {tokens.map((line, i) => (
             <div key={i} {...getLineProps({ line, key: i })}>
               {line.map((token, key) => (

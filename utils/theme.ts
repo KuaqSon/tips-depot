@@ -65,12 +65,6 @@ const theme = extendTheme({
         transition: 'all .2s',
       },
     },
-    Heading: {
-      baseStyle: {
-        color: 'heading',
-        fontWeight: 'semibold',
-      },
-    },
     IconButton: {
       baseStyle: {
         _focus: {
@@ -108,11 +102,6 @@ const theme = extendTheme({
         _focus: {
           boxShadow: 'none',
         },
-      },
-    },
-    Text: {
-      baseStyle: {
-        color: 'black',
       },
     },
     Container: {
