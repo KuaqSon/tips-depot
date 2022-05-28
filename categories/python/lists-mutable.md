@@ -1,6 +1,7 @@
 ---
 title: List Mutable
 category: Python
+updated: '2021-09-26'
 ---
 
 ### Lists (mutable)

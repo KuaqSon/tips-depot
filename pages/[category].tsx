@@ -1,4 +1,4 @@
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, Container, VStack } from '@chakra-ui/react';
 import { IPost } from 'utils/types';
 import fs from 'fs';
 import { join } from 'path';
@@ -38,9 +38,9 @@ export default function CategoryPage({ categories, category, posts }: CategoryPa
         }}
       />
 
-      <BreadcrumbBar links={links} />
       <PageTransition>
-        <Box>
+        <Container>
+          <BreadcrumbBar links={links} />
           <Box>{category}</Box>
           <Box>
             <Box>Posts</Box>
@@ -64,7 +64,7 @@ export default function CategoryPage({ categories, category, posts }: CategoryPa
               ))}
             </VStack>
           </Box>
-        </Box>
+        </Container>
       </PageTransition>
     </>
   );

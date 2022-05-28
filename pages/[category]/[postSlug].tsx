@@ -1,14 +1,16 @@
 import { IPost } from 'utils/types';
 import fs from 'fs';
-import { groupByCategory, loadSnippets, slugify, unSlugify } from 'utils/helpers';
+import { groupByCategory, loadSnippets, shuffle, slugify, unSlugify } from 'utils/helpers';
 import { CATEGORIES_DIR } from 'utils/constants';
 import { join } from 'path';
 import matter from 'gray-matter';
-import { Box } from '@chakra-ui/react';
+import { Box, Container, VStack } from '@chakra-ui/react';
 import MarkdownBox from 'components/MarkdownBox';
 import PageTransition from 'components/PageTransition';
 import BreadcrumbBar from 'components/BreadcrumbBar';
 import SEO from 'components/SEO';
+import Link from 'next/link';
+import TimeAgo from 'timeago-react';
 
 interface PostPageParams {
   category: string;
@@ -19,12 +21,11 @@ interface PostPageProps {
   categories: string[];
   content: string;
   frontMatter: { [key: string]: any };
-  prevPost?: IPost;
-  nextPost?: IPost;
   post: IPost;
+  otherPosts?: IPost[];
 }
 
-export default function PostPage({ categories, content, frontMatter, prevPost, nextPost, post }: PostPageProps) {
+export default function PostPage({ categories, content, frontMatter, otherPosts, post }: PostPageProps) {
   const links = [
     {
       label: 'Home',
@@ -47,14 +48,39 @@ export default function PostPage({ categories, content, frontMatter, prevPost, n
           title: `${post.title} - Tips Depot`,
         }}
       />
-      <BreadcrumbBar links={links} />
+      <VStack alignItems="center" py={4}>
+        <Box fontSize="24px" fontWeight="bold">
+          {post.title}
+        </Box>
+        <BreadcrumbBar links={links} />
+      </VStack>
       <PageTransition>
-        <Box>
-          <Box>{post.title}</Box>
+        <Container>
+          <TimeAgo datetime={frontMatter.updated} />
           <Box>
             <MarkdownBox>{content}</MarkdownBox>
           </Box>
-        </Box>
+          <Box>
+            <Box>Other Posts</Box>
+            <VStack>
+              {otherPosts?.map((p) => (
+                <Link key={p.slug} href={`/${p.href}`}>
+                  {p.title}
+                </Link>
+              ))}
+            </VStack>
+          </Box>
+          <Box>
+            <Box>Categories</Box>
+            <VStack>
+              {categories.map((c) => (
+                <Link key={c} href={`/${slugify(c)}`}>
+                  {unSlugify(c)}
+                </Link>
+              ))}
+            </VStack>
+          </Box>
+        </Container>
       </PageTransition>
     </>
   );
@@ -66,22 +92,17 @@ export const getStaticProps = async ({ params }: { params: PostPageParams }) => 
   const { category, postSlug } = params;
   const fileContents = fs.readFileSync(join(CATEGORIES_DIR, category, `${postSlug}.md`));
   const { data: frontMatter, content } = matter(fileContents);
-
-  // Determine the next and previous posts
   const index = posts.findIndex((s) => s.slug === postSlug);
   const categories = Object.keys(groupByCategory(posts));
-
-  const prevPost = index <= 0 ? null : posts[index - 1];
-  const nextPost = index >= posts.length - 1 ? null : posts[index + 1];
+  const otherPosts = shuffle(posts.filter((p) => p.slug !== postSlug)).slice(0, 6);
 
   return {
     props: {
       categories,
       content,
       frontMatter,
-      prevPost,
-      nextPost,
       post: posts[index],
+      otherPosts,
     },
   };
 };

@@ -1,6 +1,7 @@
 ---
 title: Conditions
 category: MySQL
+updated: '2021-08-25'
 ---
 
 ### Conditions

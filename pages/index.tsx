@@ -1,4 +1,4 @@
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, Container, VStack } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import fs from 'fs';
 import { join } from 'path';
@@ -13,7 +13,7 @@ const Home: NextPage<{ categories: string[] }> = ({ categories }) => {
     <>
       <SEO />
       <PageTransition>
-        <Box>
+        <Container>
           <VStack>
             {categories.map((c) => (
               <Link key={c} href={`/${c}`}>
@@ -21,7 +21,7 @@ const Home: NextPage<{ categories: string[] }> = ({ categories }) => {
               </Link>
             ))}
           </VStack>
-        </Box>
+        </Container>
       </PageTransition>
     </>
   );

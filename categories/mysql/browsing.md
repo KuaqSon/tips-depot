@@ -1,6 +1,7 @@
 ---
 title: Mysql Browsing
 category: MySQL
+updated: '2021-08-23'
 ---
 
 ### Browsing

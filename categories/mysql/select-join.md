@@ -1,6 +1,7 @@
 ---
 title: Select - Join
 category: MySQL
+updated: '2021-09-25'
 ---
 
 ### Select - Join

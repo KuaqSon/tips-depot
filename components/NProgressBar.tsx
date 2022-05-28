@@ -1,6 +1,6 @@
 import Router from 'next/router';
 import NProgress from 'nprogress';
-import React from 'react';
+import { useEffect } from 'react';
 
 export default function NProgressBar({
   startPosition = 0.3,
@@ -8,17 +8,14 @@ export default function NProgressBar({
   showOnShallow = true,
   options,
 }: {
-  color?: string;
   startPosition?: number;
   stopDelayMs?: number;
-  height?: number;
   showOnShallow?: boolean;
   options?: Partial<NProgress.NProgressOptions>;
-  nonce?: string;
 }) {
   let timer: NodeJS.Timeout | null = null;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (options) {
       NProgress.configure(options);
     }

@@ -7,14 +7,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Box>
       <Header />
-      <Container
-        maxW={MAX_WIDTH_SIZE}
-        minHeight={`calc(100vh - ${+HEADER_HEIGHT + +FOOTER_HEIGHT}px)`}
-        mt={`${HEADER_HEIGHT}px`}
-        pt={4}
-      >
+      <Box minHeight={`calc(100vh - ${+HEADER_HEIGHT + +FOOTER_HEIGHT}px)`} mt={`${HEADER_HEIGHT}px`} pt={4}>
         {children}
-      </Container>
+      </Box>
       <Footer />
     </Box>
   );

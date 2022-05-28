@@ -1,6 +1,18 @@
 import { extendTheme } from '@chakra-ui/react';
+import { MAX_WIDTH_SIZE } from 'utils/constants';
+import { mode } from '@chakra-ui/theme-tools';
 
 const theme = extendTheme({
+  styles: {
+    global: (props: any) => ({
+      body: {
+        fontFamily: 'body',
+        color: mode('#1d1d1f', '#F5F5F7')(props),
+        bg: mode('#ffffff', '#000000')(props),
+        lineHeight: 'base',
+      },
+    }),
+  },
   colors: {
     brand: {
       900: '#1a365d',
@@ -31,6 +43,7 @@ const theme = extendTheme({
     secondaryMuted: '#717171',
     info: '#4457f7',
     border: '#E4E4E4',
+    link: '#0072F5',
   },
   fonts: {
     body: "'Be Vietnam Pro', sans-serif",
@@ -100,6 +113,11 @@ const theme = extendTheme({
     Text: {
       baseStyle: {
         color: 'black',
+      },
+    },
+    Container: {
+      baseStyle: {
+        maxW: MAX_WIDTH_SIZE,
       },
     },
   },
