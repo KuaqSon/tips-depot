@@ -3,7 +3,7 @@ import { IPost } from 'utils/types';
 import fs from 'fs';
 import { join } from 'path';
 import { CATEGORIES_DIR } from 'utils/constants';
-import { loadSnippetsOfCategory, unSlugify } from 'utils/helpers';
+import { loadSnippetsOfCategory, slugify, unSlugify } from 'utils/helpers';
 import Link from 'next/link';
 import PageTransition from 'components/PageTransition';
 import BreadcrumbBar from 'components/BreadcrumbBar';
@@ -26,7 +26,7 @@ export default function CategoryPage({ categories, category, posts }: CategoryPa
     },
     {
       label: category,
-      href: `/${category}`,
+      href: `/${slugify(category)}`,
     },
   ];
 
