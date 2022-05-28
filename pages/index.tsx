@@ -1,24 +1,25 @@
 import { Box, VStack } from '@chakra-ui/react';
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
 import fs from 'fs';
 import { join } from 'path';
 import { CATEGORIES_DIR } from 'utils/constants';
 import Link from 'next/link';
-import { unslugifyCategory } from 'utils/helpers';
+import { unSlugify } from 'utils/helpers';
+import PageTransition from 'components/PageTransition';
 
 const Home: NextPage<{ categories: string[] }> = ({ categories }) => {
   return (
-    <Box>
-      <VStack>
-        {categories.map((c) => (
-          <Link key={c} href={`/${c}`}>
-            {unslugifyCategory(c)}
-          </Link>
-        ))}
-      </VStack>
-    </Box>
+    <PageTransition>
+      <Box>
+        <VStack>
+          {categories.map((c) => (
+            <Link key={c} href={`/${c}`}>
+              {unSlugify(c)}
+            </Link>
+          ))}
+        </VStack>
+      </Box>
+    </PageTransition>
   );
 };
 

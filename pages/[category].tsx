@@ -3,8 +3,11 @@ import { IPost } from 'utils/types';
 import fs from 'fs';
 import { join } from 'path';
 import { CATEGORIES_DIR } from 'utils/constants';
-import { loadSnippetsOfCategory, unslugifyCategory } from 'utils/helpers';
+import { loadSnippetsOfCategory, unSlugify } from 'utils/helpers';
 import Link from 'next/link';
+import PageTransition from 'components/PageTransition';
+import BreadcrumbBar from 'components/ BreadcrumbBar';
+import Head from 'next/head';
 
 interface CategoryPageParams {
   category: string;
@@ -16,32 +19,51 @@ interface CategoryPageProps {
 }
 
 export default function CategoryPage({ categories, category, posts }: CategoryPageProps) {
+  const links = [
+    {
+      label: 'Home',
+      href: '/',
+    },
+    {
+      label: category,
+      href: `/${category}`,
+    },
+  ];
+
   return (
-    <Box>
-      <Box>{category}</Box>
-      <Box>
-        <Box>Posts</Box>
+    <>
+      <Head>
+        <title>{category} - Tips Depot</title>
+      </Head>
+      <BreadcrumbBar links={links} />
+      <PageTransition>
         <Box>
-          <VStack>
-            {posts.map((p) => (
-              <Link key={p.slug} href={`/${p.href}`}>
-                {p.title}
-              </Link>
-            ))}
-          </VStack>
+          <Box>{category}</Box>
+          <Box>
+            <Box>Posts</Box>
+            <Box>
+              <VStack>
+                {posts.map((p) => (
+                  <Link key={p.slug} href={`/${p.href}`}>
+                    {p.title}
+                  </Link>
+                ))}
+              </VStack>
+            </Box>
+          </Box>
+          <Box>
+            <Box>Categories</Box>
+            <VStack>
+              {categories.map((c) => (
+                <Link key={c} href={`/${c}`}>
+                  {unSlugify(c)}
+                </Link>
+              ))}
+            </VStack>
+          </Box>
         </Box>
-      </Box>
-      <Box>
-        <Box>Categories</Box>
-        <VStack>
-          {categories.map((c) => (
-            <Link key={c} href={`/${c}`}>
-              {unslugifyCategory(c)}
-            </Link>
-          ))}
-        </VStack>
-      </Box>
-    </Box>
+      </PageTransition>
+    </>
   );
 }
 
@@ -53,7 +75,7 @@ export const getStaticProps = async ({ params }: { params: CategoryPageParams })
   return {
     props: {
       categories,
-      category,
+      category: unSlugify(category),
       posts,
     },
   };

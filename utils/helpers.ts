@@ -23,7 +23,7 @@ export const loadSnippetsOfCategory = (category: string): IPost[] =>
     return {
       slug,
       category: frontMatter.category,
-      href: `${slugifyCategory(frontMatter.category)}/${slug}`,
+      href: `${slugify(category)}/${slug}`,
       title: frontMatter.title,
     };
   });
@@ -36,10 +36,10 @@ export const groupByCategory = (snippets: IPost[]) =>
 
 const capitalize = (str: string) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
 
-export const slugifyCategory = (category: string) => category.toLowerCase().split(' ').join('-');
+export const slugify = (text: string) => text.toLowerCase().split(' ').join('-');
 
-export const unslugifyCategory = (category: string) =>
-  category
+export const unSlugify = (text: string) =>
+  text
     .split('-')
     .map((s) => capitalize(s))
     .join(' ');

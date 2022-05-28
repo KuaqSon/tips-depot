@@ -10,7 +10,7 @@
     "format": "npx prettier --config .prettierrc --write -c ."
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.1.2",
+    "@chakra-ui/react": "2.0.0",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "framer-motion": "^6",

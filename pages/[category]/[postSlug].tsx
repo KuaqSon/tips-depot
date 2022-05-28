@@ -1,11 +1,14 @@
 import { IPost } from 'utils/types';
 import fs from 'fs';
-import { groupByCategory, loadSnippets } from 'utils/helpers';
+import { groupByCategory, loadSnippets, slugify, unSlugify } from 'utils/helpers';
 import { CATEGORIES_DIR } from 'utils/constants';
 import { join } from 'path';
 import matter from 'gray-matter';
 import { Box } from '@chakra-ui/react';
 import MarkdownBox from 'components/MarkdownBox';
+import PageTransition from 'components/PageTransition';
+import BreadcrumbBar from 'components/ BreadcrumbBar';
+import Head from 'next/head';
 
 interface PostPageParams {
   category: string;
@@ -22,14 +25,35 @@ interface PostPageProps {
 }
 
 export default function PostPage({ categories, content, frontMatter, prevPost, nextPost, post }: PostPageProps) {
+  const links = [
+    {
+      label: 'Home',
+      href: '/',
+    },
+    {
+      label: unSlugify(post.category),
+      href: `/${slugify(post.category)}`,
+    },
+    {
+      label: post.title,
+      href: `/${post.href}`,
+    },
+  ];
+
   return (
     <>
-      <Box>
-        <Box>{post.title}</Box>
+      <Head>
+        <title>{post.title} - Tips Depot</title>
+      </Head>
+      <BreadcrumbBar links={links} />
+      <PageTransition>
         <Box>
-          <MarkdownBox>{content}</MarkdownBox>
+          <Box>{post.title}</Box>
+          <Box>
+            <MarkdownBox>{content}</MarkdownBox>
+          </Box>
         </Box>
-      </Box>
+      </PageTransition>
     </>
   );
 }

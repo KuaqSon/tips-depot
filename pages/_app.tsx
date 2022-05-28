@@ -5,7 +5,6 @@ import theme from 'utils/theme';
 import Layout from 'components/Layout';
 import Head from 'next/head';
 
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
