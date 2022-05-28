@@ -6,8 +6,8 @@ import { CATEGORIES_DIR } from 'utils/constants';
 import { loadSnippetsOfCategory, unSlugify } from 'utils/helpers';
 import Link from 'next/link';
 import PageTransition from 'components/PageTransition';
-import BreadcrumbBar from 'components/ BreadcrumbBar';
-import Head from 'next/head';
+import BreadcrumbBar from 'components/BreadcrumbBar';
+import SEO from 'components/SEO';
 
 interface CategoryPageParams {
   category: string;
@@ -32,9 +32,12 @@ export default function CategoryPage({ categories, category, posts }: CategoryPa
 
   return (
     <>
-      <Head>
-        <title>{category} - Tips Depot</title>
-      </Head>
+      <SEO
+        customMeta={{
+          title: `${category} - Tips Depot`,
+        }}
+      />
+
       <BreadcrumbBar links={links} />
       <PageTransition>
         <Box>

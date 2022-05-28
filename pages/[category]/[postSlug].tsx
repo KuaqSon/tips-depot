@@ -7,8 +7,8 @@ import matter from 'gray-matter';
 import { Box } from '@chakra-ui/react';
 import MarkdownBox from 'components/MarkdownBox';
 import PageTransition from 'components/PageTransition';
-import BreadcrumbBar from 'components/ BreadcrumbBar';
-import Head from 'next/head';
+import BreadcrumbBar from 'components/BreadcrumbBar';
+import SEO from 'components/SEO';
 
 interface PostPageParams {
   category: string;
@@ -42,9 +42,11 @@ export default function PostPage({ categories, content, frontMatter, prevPost, n
 
   return (
     <>
-      <Head>
-        <title>{post.title} - Tips Depot</title>
-      </Head>
+      <SEO
+        customMeta={{
+          title: `${post.title} - Tips Depot`,
+        }}
+      />
       <BreadcrumbBar links={links} />
       <PageTransition>
         <Box>
