@@ -16,6 +16,7 @@
     "framer-motion": "^6",
     "gray-matter": "^4.0.3",
     "next": "12.1.6",
+    "nprogress": "^0.2.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-markdown": "^8.0.3",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@types/node": "17.0.35",
+    "@types/nprogress": "^0.2.0",
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.5",
     "eslint": "8.16.0",
