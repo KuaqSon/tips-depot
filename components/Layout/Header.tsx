@@ -2,7 +2,6 @@ import { MoonIcon, SearchIcon, SunIcon } from '@chakra-ui/icons';
 import {
   Box,
   Button,
-  Center,
   Container,
   Flex,
   HStack,
@@ -48,8 +47,8 @@ export default function Header() {
                   <Box>
                     <SearchIcon />
                   </Box>
-                  <Box>Search...</Box>
-                  <Box>
+                  <Box display={{ base: 'none', md: 'block' }}>Search...</Box>
+                  <Box display={{ base: 'none', md: 'block' }}>
                     <Kbd>⌘</Kbd> + <Kbd>K</Kbd>
                   </Box>
                 </HStack>
