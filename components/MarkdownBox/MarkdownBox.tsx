@@ -8,7 +8,7 @@ import Heading4 from 'components/MarkdownBox/utilities/Heading4';
 import Heading5 from 'components/MarkdownBox/utilities/Heading5';
 import Heading6 from 'components/MarkdownBox/utilities/Heading6';
 import MdImage from 'components/MarkdownBox/utilities/MdImage';
-import MdLink from 'components/MarkdownBox/utilities/MDLink';
+import MdHref from 'components/MarkdownBox/utilities/MdHref';
 import MdUnorderedList from 'components/MarkdownBox/utilities/MdUnorderedList';
 import MdOrderedList from 'components/MarkdownBox/utilities/MdOrderedList';
 import MdParagraph from 'components/MarkdownBox/utilities/MdParagraph';
@@ -25,7 +25,7 @@ import remarkGfm from 'remark-gfm';
 import { Td, Th } from '@chakra-ui/react';
 
 const components = {
-  a: MdLink,
+  a: MdHref,
   blockquote: Blockquote,
   code: Code,
   h1: Heading1,
