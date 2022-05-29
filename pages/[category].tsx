@@ -1,13 +1,13 @@
-import { Box, Container, VStack } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading, useColorModeValue, VStack } from '@chakra-ui/react';
 import { IPost } from 'utils/types';
 import fs from 'fs';
 import { join } from 'path';
 import { CATEGORIES_DIR } from 'utils/constants';
 import { loadSnippetsOfCategory, slugify, unSlugify } from 'utils/helpers';
-import Link from 'next/link';
 import PageTransition from 'components/PageTransition';
 import BreadcrumbBar from 'components/BreadcrumbBar';
 import SEO from 'components/SEO';
+import NextLinkBox from 'components/NextLinkBox';
 
 interface CategoryPageParams {
   category: string;
@@ -38,33 +38,42 @@ export default function CategoryPage({ categories, category, posts }: CategoryPa
         }}
       />
 
-      <PageTransition>
+      <Box bg={useColorModeValue('bgLight', 'bgDark')}>
         <Container>
-          <BreadcrumbBar links={links} />
-          <Box>{category}</Box>
-          <Box>
-            <Box>Posts</Box>
-            <Box>
-              <VStack>
-                {posts.map((p) => (
-                  <Link key={p.slug} href={`/${p.href}`}>
-                    {p.title}
-                  </Link>
-                ))}
-              </VStack>
-            </Box>
-          </Box>
-          <Box>
-            <Box>Categories</Box>
-            <VStack>
-              {categories.map((c) => (
-                <Link key={c} href={`/${c}`}>
-                  {unSlugify(c)}
-                </Link>
-              ))}
-            </VStack>
-          </Box>
+          <VStack alignItems="center" py="32px">
+            <Heading>{category}</Heading>
+            <BreadcrumbBar links={links} />
+          </VStack>
         </Container>
+      </Box>
+
+      <PageTransition>
+        <Container py="32px">
+          <Box py={2} fontWeight="bold" fontSize="lg">
+            Posts
+          </Box>
+          <Flex flexWrap="wrap" m={-2}>
+            {posts.map((p) => (
+              <NextLinkBox key={p.slug} href={`/${p.href}`} variant="outline">
+                <Box fontWeight="600">{p.title}</Box>
+              </NextLinkBox>
+            ))}
+          </Flex>
+        </Container>
+        <Box bg={useColorModeValue('bgLight', 'bgDark')}>
+          <Container py="32px">
+            <Box py={2} fontWeight="bold" fontSize="lg">
+              Categories
+            </Box>
+            <Flex flexWrap="wrap" m={-2}>
+              {categories.map((c) => (
+                <NextLinkBox key={c} href={`/${slugify(c)}`}>
+                  <Box fontWeight="600">{unSlugify(c)}</Box>
+                </NextLinkBox>
+              ))}
+            </Flex>
+          </Container>
+        </Box>
       </PageTransition>
     </>
   );

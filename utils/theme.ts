@@ -30,6 +30,8 @@ const theme = extendTheme({
     muted: '#A4B0BE',
     bg: '#FAFBFC',
     bgActive: '#EBECF0',
+    bgLight: '#fafafa',
+    bgDark: '#141414',
     main: '#243151',
     heading: '#1952AF',
     semiHeading: '#0071f0',

@@ -1,16 +1,17 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { IPost } from 'utils/types';
 import fs from 'fs';
 import { groupByCategory, loadSnippets, shuffle, slugify, unSlugify } from 'utils/helpers';
 import { CATEGORIES_DIR } from 'utils/constants';
 import { join } from 'path';
 import matter from 'gray-matter';
-import { Box, Container, VStack } from '@chakra-ui/react';
+import { Badge, Box, Container, Flex, Heading, Text, useColorModeValue, VStack } from '@chakra-ui/react';
 import MarkdownBox from 'components/MarkdownBox';
 import PageTransition from 'components/PageTransition';
 import BreadcrumbBar from 'components/BreadcrumbBar';
 import SEO from 'components/SEO';
-import Link from 'next/link';
 import TimeAgo from 'timeago-react';
+import NextLinkBox from 'components/NextLinkBox';
 
 interface PostPageParams {
   category: string;
@@ -48,39 +49,67 @@ export default function PostPage({ categories, content, frontMatter, otherPosts,
           title: `${post.title} - Tips Depot`,
         }}
       />
-      <VStack alignItems="center" py={4}>
-        <Box fontSize="24px" fontWeight="bold">
-          {post.title}
-        </Box>
-        <BreadcrumbBar links={links} />
-      </VStack>
-      <PageTransition>
+      <Box bg={useColorModeValue('bgLight', 'bgDark')}>
         <Container>
-          <TimeAgo datetime={frontMatter.updated} />
-          <Box>
+          <VStack alignItems="center" py="32px">
+            <Heading>{post.title}</Heading>
+            <BreadcrumbBar links={links} />
+          </VStack>
+        </Container>
+      </Box>
+      <PageTransition>
+        <Container py="24px">
+          <Box lineHeight="1.8">
             <MarkdownBox>{content}</MarkdownBox>
           </Box>
-          <Box>
-            <Box>Other Posts</Box>
-            <VStack>
-              {otherPosts?.map((p) => (
-                <Link key={p.slug} href={`/${p.href}`}>
-                  {p.title}
-                </Link>
-              ))}
-            </VStack>
-          </Box>
-          <Box>
-            <Box>Categories</Box>
-            <VStack>
-              {categories.map((c) => (
-                <Link key={c} href={`/${slugify(c)}`}>
-                  {unSlugify(c)}
-                </Link>
-              ))}
-            </VStack>
+          <Box mt={4}>
+            <Badge>
+              <Box textTransform="none">
+                <TimeAgo datetime={frontMatter.updated} />
+              </Box>
+            </Badge>
           </Box>
         </Container>
+        <Box bg={useColorModeValue('bgLight', 'bgDark')}>
+          <Container>
+            <Box py="24px">
+              <Box py={2} fontSize="xl">
+                Other Posts
+              </Box>
+              <Flex flexWrap="wrap" alignItems="stretch" m={-2}>
+                {otherPosts?.map((p) => (
+                  <NextLinkBox key={p.slug} href={`/${p.href}`}>
+                    <Flex flexWrap="wrap" alignItems="baseline">
+                      <Box fontWeight="600" mr={2}>
+                        {p.title}
+                      </Box>
+                      <Box
+                        fontSize="xs"
+                        fontWeight="400"
+                        textTransform="uppercase"
+                        color={useColorModeValue('gray.500', 'gray.300')}
+                      >
+                        {p.category}
+                      </Box>
+                    </Flex>
+                  </NextLinkBox>
+                ))}
+              </Flex>
+            </Box>
+            <Box py="24px">
+              <Box py={2} fontSize="xl">
+                Categories
+              </Box>
+              <Flex flexWrap="wrap" m={-2}>
+                {categories.map((c) => (
+                  <NextLinkBox key={c} href={`/${slugify(c)}`}>
+                    <Box fontWeight="600">{unSlugify(c)}</Box>
+                  </NextLinkBox>
+                ))}
+              </Flex>
+            </Box>
+          </Container>
+        </Box>
       </PageTransition>
     </>
   );
