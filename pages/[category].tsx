@@ -49,7 +49,7 @@ export default function CategoryPage({ categories, category, posts }: CategoryPa
 
       <PageTransition>
         <Container py="32px">
-          <Box py={2} fontWeight="bold" fontSize="lg">
+          <Box py={2} fontSize="xl">
             Posts
           </Box>
           <Flex flexWrap="wrap" m={-2}>
@@ -62,7 +62,7 @@ export default function CategoryPage({ categories, category, posts }: CategoryPa
         </Container>
         <Box bg={useColorModeValue('bgLight', 'bgDark')}>
           <Container py="32px">
-            <Box py={2} fontWeight="bold" fontSize="lg">
+            <Box py={2} fontSize="xl">
               Categories
             </Box>
             <Flex flexWrap="wrap" m={-2}>
@@ -86,7 +86,7 @@ export const getStaticProps = async ({ params }: { params: CategoryPageParams })
 
   return {
     props: {
-      categories,
+      categories: categories.filter((c) => c !== category),
       category: unSlugify(category),
       posts,
     },

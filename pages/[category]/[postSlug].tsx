@@ -5,7 +5,7 @@ import { groupByCategory, loadSnippets, shuffle, slugify, unSlugify } from 'util
 import { CATEGORIES_DIR } from 'utils/constants';
 import { join } from 'path';
 import matter from 'gray-matter';
-import { Badge, Box, Container, Flex, Heading, Text, useColorModeValue, VStack } from '@chakra-ui/react';
+import { Badge, Box, Container, Flex, Heading, useColorModeValue, VStack } from '@chakra-ui/react';
 import MarkdownBox from 'components/MarkdownBox';
 import PageTransition from 'components/PageTransition';
 import BreadcrumbBar from 'components/BreadcrumbBar';
@@ -123,7 +123,7 @@ export const getStaticProps = async ({ params }: { params: PostPageParams }) => 
   const { data: frontMatter, content } = matter(fileContents);
   const index = posts.findIndex((s) => s.slug === postSlug);
   const categories = Object.keys(groupByCategory(posts));
-  const otherPosts = shuffle(posts.filter((p) => p.slug !== postSlug)).slice(0, 6);
+  const otherPosts = shuffle(posts.filter((p) => p.slug !== postSlug)).slice(0, 8);
 
   return {
     props: {
