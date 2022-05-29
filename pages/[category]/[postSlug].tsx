@@ -51,7 +51,7 @@ export default function PostPage({ categories, content, frontMatter, otherPosts,
       />
       <Box bg={useColorModeValue('bgLight', 'bgDark')}>
         <Container>
-          <VStack alignItems="center" py="32px">
+          <VStack alignItems="center" py="32px" textAlign="center">
             <Heading>{post.title}</Heading>
             <BreadcrumbBar links={links} />
           </VStack>

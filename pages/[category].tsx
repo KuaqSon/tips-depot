@@ -40,7 +40,7 @@ export default function CategoryPage({ categories, category, posts }: CategoryPa
 
       <Box bg={useColorModeValue('bgLight', 'bgDark')}>
         <Container>
-          <VStack alignItems="center" py="32px">
+          <VStack alignItems="center" py="32px" textAlign="center">
             <Heading>{category}</Heading>
             <BreadcrumbBar links={links} />
           </VStack>
