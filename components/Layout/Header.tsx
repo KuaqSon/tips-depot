@@ -9,12 +9,14 @@ import {
   Kbd,
   useColorMode,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { HEADER_HEIGHT } from 'utils/constants';
 
 export default function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
+  const toast = useToast();
 
   return (
     <Box
@@ -42,7 +44,11 @@ export default function Header() {
           </Box>
           <HStack>
             <Box>
-              <Button>
+              <Button
+                onClick={() =>
+                  toast({ title: 'Coming Soon!', isClosable: true, position: 'bottom', status: 'success' })
+                }
+              >
                 <HStack>
                   <Box>
                     <SearchIcon />
