@@ -10,7 +10,14 @@ class Document extends NextDocument {
   render() {
     return (
       <Html lang="en">
-        <Head></Head>
+        <Head>
+          <script
+            async
+            defer
+            data-website-id="eaa65734-2ede-4f96-99fa-e78865a6d7fb"
+            src="https://umami.nqson.com/umami.js"
+          ></script>
+        </Head>
         <body>
           <ColorModeScript />
           <Main />
