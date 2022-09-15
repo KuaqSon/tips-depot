@@ -3,7 +3,7 @@ import React from 'react';
 
 const Heading2 = ({ children }: { children: React.ReactNode }) => (
   <>
-    <Heading as="h2" size="xl">
+    <Heading as="h2" size="xl" mt="4">
       {children}
     </Heading>
   </>
